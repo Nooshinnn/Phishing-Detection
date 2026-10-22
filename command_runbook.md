@@ -4,13 +4,6 @@
 
 ---
 
-## 0. Already running (from before this message)
-
-```
-# Architecture ablation (20 runs) -- your supervisor flagged this as lower priority
-# post-hoc, but you chose to keep it running. No new commands needed, just let it finish.
-
-# LLM-paraphrase + URLGAN coordinated attack -- still running, slowest of the six pairs.
 ```
 
 ---
