@@ -9,10 +9,6 @@ import json
 
 from model_and_data_utils import load_model, build_dataset, DEVICE
 
-print("=" * 90)
-print("PDGAN ATTACK EVALUATION -- FIXED: generator never trained on this test_df")
-print("Using canonical checkpoint: original_best_model_fixed.pth")
-print("=" * 90)
 
 email_model, url_model, comm_model, email_tokenizer, url_tokenizer = load_model()
 train_df, val_df, test_df = build_dataset()
