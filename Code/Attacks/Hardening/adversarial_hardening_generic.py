@@ -112,6 +112,12 @@ def gen_pwws():
 
     def attack(text, url, label, change_percent=0.30):
         words = text.split()
+        # FIX: cap word processing to ~200 words. The classifier truncates
+        # input to 256 tokens anyway, so scoring words beyond that point is
+        # wasted work AND -- for pathological outlier training examples with
+        # thousands of words (long spam/HTML-heavy emails) -- was causing the
+        # per-word saliency loop to take extremely long on a single row,
+        # making the progress bar look frozen while it ground through it.
         words = words[:200]
         if len(words) < 5:
             return text
@@ -183,6 +189,12 @@ def gen_textfooler():
 
     def attack(text, url, label, change_percent=0.30):
         words = text.split()
+        # FIX: cap word processing to ~200 words. The classifier truncates
+        # input to 256 tokens anyway, so scoring words beyond that point is
+        # wasted work AND -- for pathological outlier training examples with
+        # thousands of words (long spam/HTML-heavy emails) -- was causing the
+        # per-word saliency loop to take extremely long on a single row,
+        # making the progress bar look frozen while it ground through it.
         words = words[:200]
         if len(words) < 5:
             return text
@@ -233,6 +245,12 @@ def gen_bae():
 
     def attack(text, url, label, change_percent=0.30):
         words = text.split()
+        # FIX: cap word processing to ~200 words. The classifier truncates
+        # input to 256 tokens anyway, so scoring words beyond that point is
+        # wasted work AND -- for pathological outlier training examples with
+        # thousands of words (long spam/HTML-heavy emails) -- was causing the
+        # per-word saliency loop to take extremely long on a single row,
+        # making the progress bar look frozen while it ground through it.
         words = words[:200]
         if len(words) < 5:
             return text
@@ -325,6 +343,12 @@ def gen_textbugger():
 
     def attack(text, url, label, change_percent=0.30):
         words = text.split()
+        # FIX: cap word processing to ~200 words. The classifier truncates
+        # input to 256 tokens anyway, so scoring words beyond that point is
+        # wasted work AND -- for pathological outlier training examples with
+        # thousands of words (long spam/HTML-heavy emails) -- was causing the
+        # per-word saliency loop to take extremely long on a single row,
+        # making the progress bar look frozen while it ground through it.
         words = words[:200]
         if len(words) < 5:
             return text
@@ -369,7 +393,7 @@ def gen_textbugger():
 
 def gen_pdgan():
     from transformers import AutoTokenizer, AutoModelForMaskedLM
-    print("Loading pdgan_generator_fixed.pth -- must already exist (your finalized generator).")
+    print("Loading pdgan_generator_fixed_seed42.pth -- must already exist (your finalized generator).")
 
     class PDGAN_Generator(nn.Module):
         def __init__(self):
@@ -379,7 +403,7 @@ def gen_pdgan():
             return self.mlm(input_ids=input_ids, attention_mask=attention_mask).logits
 
     gen = PDGAN_Generator().to(device)
-    gen.load_state_dict(torch.load("pdgan_generator_fixed.pth", map_location=device))
+    gen.load_state_dict(torch.load("pdgan_generator_fixed_seed42.pth", map_location=device))
     gen.eval()
 
     def is_english_text(text, min_chars=15):
