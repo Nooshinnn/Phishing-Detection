@@ -10,10 +10,6 @@ from model_and_data_utils import load_model, build_dataset, DEVICE
 
 import sys
 
-# Usage: python PDGAN_train_fixed.py [seed] [fluency_weight]
-#   no args           -> seed 42, lambda 5.0 (the paper's configuration)
-#   python PDGAN_train_fixed.py 100          -> seed 100, lambda 5.0
-#   python PDGAN_train_fixed.py 42 4.0       -> seed 42, lambda 4.0
 SEED = int(sys.argv[1]) if len(sys.argv) > 1 else 42
 LAMBDA_ARG = float(sys.argv[2]) if len(sys.argv) > 2 else 5.0
 TAG = f"seed{SEED}" + ("" if LAMBDA_ARG == 5.0 else f"_lam{LAMBDA_ARG}")
