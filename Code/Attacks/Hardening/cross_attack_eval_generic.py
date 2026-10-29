@@ -1,4 +1,3 @@
-
 import sys
 import os
 import torch
@@ -104,6 +103,8 @@ def attack_pwws(text, url, label):
         return list(out)
 
     words = text.split()
+    # FIX: cap to ~200 words -- classifier truncates at 256 tokens anyway,
+    # and this prevents pathological long-text rows from hanging the loop.
     words = words[:200]
     if len(words) < 5:
         return text, url
@@ -172,6 +173,8 @@ def attack_textfooler(text, url, label):
         return [c for c, _ in n if c.isalpha() and c.lower() != wl and is_english_word(c)]
 
     words = text.split()
+    # FIX: cap to ~200 words -- classifier truncates at 256 tokens anyway,
+    # and this prevents pathological long-text rows from hanging the loop.
     words = words[:200]
     if len(words) < 5:
         return text, url
@@ -220,6 +223,8 @@ def attack_bae(text, url, label):
     mlm_tok, mlm = _BAE_TOK, _BAE_MLM
 
     words = text.split()
+    # FIX: cap to ~200 words -- classifier truncates at 256 tokens anyway,
+    # and this prevents pathological long-text rows from hanging the loop.
     words = words[:200]
     if len(words) < 5:
         return text, url
@@ -307,6 +312,8 @@ def attack_textbugger(text, url, label):
 
     fns = [swap, delete, space, homo, embed]
     words = text.split()
+    # FIX: cap to ~200 words -- classifier truncates at 256 tokens anyway,
+    # and this prevents pathological long-text rows from hanging the loop.
     words = words[:200]
     if len(words) < 5:
         return text, url
@@ -355,7 +362,7 @@ def attack_pdgan(text, url, label):
             def forward(self, input_ids, attention_mask=None):
                 return self.mlm(input_ids=input_ids, attention_mask=attention_mask).logits
         _PDGAN_GEN = PDGAN_Generator().to(device)
-        _PDGAN_GEN.load_state_dict(torch.load("pdgan_generator_fixed.pth", map_location=device))
+        _PDGAN_GEN.load_state_dict(torch.load("pdgan_generator_fixed_seed42.pth", map_location=device))
         _PDGAN_GEN.eval()
 
     def is_english_text(t, min_chars=15):
