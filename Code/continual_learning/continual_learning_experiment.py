@@ -145,6 +145,7 @@ def train_loop(email_model, url_model, comm_model, train_df, val_df, n_epochs=15
     return best_state
 
 
+# ====================== PHASE 1: base model on 5 sources ======================
 print("\n" + "=" * 90)
 print("PHASE 1: Training base model on 5 sources (excludes new campaign)")
 print("=" * 90)
@@ -172,6 +173,7 @@ def load_base_copy():
     c.load_state_dict(base_state['comm_model'])
     return e, u, c
 
+# --- Method 1: Naive fine-tuning (train ONLY on new campaign data) ---
 print("\n" + "=" * 90)
 print("METHOD 1: Naive fine-tuning (new-campaign data only)")
 print("=" * 90)
@@ -201,7 +203,7 @@ print(f"Replay -> base_test (forgetting check): {replay_on_base}")
 print(f"Replay -> new_campaign_test (adaptation check): {replay_on_new}")
 results["methods"]["replay"] = {"on_base_test": replay_on_base, "on_new_campaign_test": replay_on_new}
 
-
+# --- Method 3: Frozen-encoder update ---
 print("\n" + "=" * 90)
 print("METHOD 3: Frozen-encoder update (encoders frozen, only comm_model updated)")
 print("=" * 90)
