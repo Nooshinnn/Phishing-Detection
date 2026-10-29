@@ -1,0 +1,51 @@
+{
+  "held_out_source": "nigerian_fraud",
+  "base_model_on_base_test": {
+    "accuracy": 0.9822222222222222,
+    "f1": 0.9800399201596807,
+    "mcc": 0.9641159959939166
+  },
+  "base_model_on_new_campaign_before_update": {
+    "accuracy": 0.9841772151898734,
+    "f1": null,
+    "mcc": null
+  },
+  "methods": {
+    "naive_finetune": {
+      "on_base_test": {
+        "accuracy": 0.46844444444444444,
+        "f1": 0.6281094527363185,
+        "mcc": 0.12745985747003868
+      },
+      "on_new_campaign_test": {
+        "accuracy": 1.0,
+        "f1": null,
+        "mcc": null
+      }
+    },
+    "replay": {
+      "on_base_test": {
+        "accuracy": 0.9866666666666667,
+        "f1": 0.9852507374631269,
+        "mcc": 0.9731630984792558
+      },
+      "on_new_campaign_test": {
+        "accuracy": 1.0,
+        "f1": null,
+        "mcc": null
+      }
+    },
+    "frozen_encoder": {
+      "on_base_test": {
+        "accuracy": 0.9857777777777778,
+        "f1": 0.9842209072978304,
+        "mcc": 0.971301333422026
+      },
+      "on_new_campaign_test": {
+        "accuracy": 0.9968354430379747,
+        "f1": null,
+        "mcc": null
+      }
+    }
+  }
+}

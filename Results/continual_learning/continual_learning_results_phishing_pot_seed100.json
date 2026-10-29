@@ -1,0 +1,51 @@
+{
+  "held_out_source": "phishing_pot",
+  "base_model_on_base_test": {
+    "accuracy": 0.9891696750902527,
+    "f1": 0.9887429643527205,
+    "mcc": 0.9783146459911342
+  },
+  "base_model_on_new_campaign_before_update": {
+    "accuracy": 0.8189655172413793,
+    "f1": null,
+    "mcc": null
+  },
+  "methods": {
+    "naive_finetune": {
+      "on_base_test": {
+        "accuracy": 0.723826714801444,
+        "f1": 0.7766423357664234,
+        "mcc": 0.5455121742175608
+      },
+      "on_new_campaign_test": {
+        "accuracy": 1.0,
+        "f1": null,
+        "mcc": null
+      }
+    },
+    "replay": {
+      "on_base_test": {
+        "accuracy": 0.9675090252707581,
+        "f1": 0.9672727272727273,
+        "mcc": 0.9370597557869471
+      },
+      "on_new_campaign_test": {
+        "accuracy": 0.9971264367816092,
+        "f1": null,
+        "mcc": null
+      }
+    },
+    "frozen_encoder": {
+      "on_base_test": {
+        "accuracy": 0.9693140794223827,
+        "f1": 0.9690346083788707,
+        "mcc": 0.9404506308601203
+      },
+      "on_new_campaign_test": {
+        "accuracy": 0.9252873563218391,
+        "f1": null,
+        "mcc": null
+      }
+    }
+  }
+}
